@@ -1,6 +1,6 @@
 # Real-World Demo: Building a Competitive Intelligence System with Docker MCP Toolkit
 
-Now that you've connected ChatGPT to Docker MCP Toolkit, let's build something practical: a **Competitive Intelligence Agent** that monitors competitor prices, stores historical data, analyzes trends, and generates strategic recommendations—all through natural conversation.
+Let's build something practical: a **Competitive Intelligence Agent** that monitors competitor prices, stores historical data, analyzes trends, and generates strategic recommendations—all through natural conversation.
 
 This isn't a toy demo. By the end of this tutorial, you'll have a working system that:
 
@@ -31,35 +31,35 @@ E-commerce businesses face a constant dilemma:
 
 ## The Solution: MCP-Powered Intelligence Agent
 
-Docker MCP Toolkit transforms ChatGPT from a conversational AI into an **autonomous intelligence system**. Here's the architecture:
+Docker MCP Toolkit transforms your AI assistant into an **autonomous intelligence system**. Here's the architecture:
 
 ```
-┌─────────────────────────────────────────────────────────────────────┐
-│                        USER REQUEST                                  │
-│            "Monitor MacBook Air M3 prices"                          │
-└─────────────────────────────┬───────────────────────────────────────┘
-                              │
-                              ▼
-┌─────────────────────────────────────────────────────────────────────┐
-│                     CHATGPT + MCP GATEWAY                           │
-│              Orchestrates tools based on intent                     │
-└─────────────────────────────┬───────────────────────────────────────┘
-                              │
-        ┌─────────────────────┼─────────────────────┐
-        │                     │                     │
-        ▼                     ▼                     ▼
-┌───────────────┐    ┌───────────────┐    ┌───────────────┐
-│   FIRECRAWL   │    │    SQLITE     │    │    GITHUB     │
-│  Scrape Web   │    │  Store Data   │    │  Push Reports │
-└───────────────┘    └───────────────┘    └───────────────┘
-        │                     │                     │
-        └─────────────────────┼─────────────────────┘
-                              │
-                              ▼
-┌─────────────────────────────────────────────────────────────────────┐
-│               SEQUENTIAL THINKING + CONTEXT7                        │
-│           Complex reasoning + Documentation lookup                  │
-└─────────────────────────────────────────────────────────────────────┘
++---------------------------------------------------------------------+
+|                        USER REQUEST                                  |
+|            "Monitor MacBook Air M3 prices"                          |
++-----------------------------+---------------------------------------+
+                              |
+                              v
++---------------------------------------------------------------------+
+|                     AI + MCP GATEWAY                                |
+|              Orchestrates tools based on intent                     |
++-----------------------------+---------------------------------------+
+                              |
+        +---------------------+---------------------+
+        |                     |                     |
+        v                     v                     v
++---------------+    +---------------+    +---------------+
+|   FIRECRAWL   |    |    SQLITE     |    |    GITHUB     |
+|  Scrape Web   |    |  Store Data   |    |  Push Reports |
++---------------+    +---------------+    +---------------+
+        |                     |                     |
+        +---------------------+---------------------+
+                              |
+                              v
++---------------------------------------------------------------------+
+|               SEQUENTIAL THINKING + CONTEXT7                        |
+|           Complex reasoning + Documentation lookup                  |
++---------------------------------------------------------------------+
 ```
 
 ### The 6 MCP Servers We'll Use
@@ -77,16 +77,16 @@ Docker MCP Toolkit transforms ChatGPT from a conversational AI into an **autonom
 
 ## The 4-Week MCP Workflow
 
-Here's how the agent operates over time, demonstrating MCP's unique value:
+Here's how the agent operates over time:
 
 ```
-Week 1: Agent scrapes prices daily → stores in SQLite
-Week 2: Agent detects 15% price drop → triggers alert  
-Week 3: Agent generates trend report → pushes to GitHub
-Week 4: You ask "Show me price history" → Agent queries 30 days instantly
+Week 1: Agent scrapes prices daily -> stores in SQLite
+Week 2: Agent detects 15% price drop -> triggers alert  
+Week 3: Agent generates trend report -> pushes to GitHub
+Week 4: You ask "Show me price history" -> Agent queries 30 days instantly
 ```
 
-**This is impossible with ChatGPT alone.** Without MCP, ChatGPT would forget everything between sessions. Let's prove it.
+Let's walk through each week with real MCP tool calls.
 
 ---
 
@@ -97,9 +97,9 @@ Week 4: You ask "Show me price history" → Agent queries 30 days instantly
 The agent first searches for reliable price data:
 
 ```
-🔧 MCP Tool: firecrawl_search
-📥 Query: "MacBook Air M3 price"
-📤 Result: 5 price sources found
+MCP Tool: firecrawl_search
+Query: "MacBook Air M3 price"
+Result: 5 price sources found
 ```
 
 **Actual MCP Response:**
@@ -130,9 +130,9 @@ The agent first searches for reliable price data:
 The agent then scrapes the full pricing table:
 
 ```
-🔧 MCP Tool: firecrawl_scrape
-📥 URL: https://prices.appleinsider.com/macbook-air-13-inch-m3
-📤 Result: Complete pricing table with 50+ configurations
+MCP Tool: firecrawl_scrape
+URL: https://prices.appleinsider.com/macbook-air-13-inch-m3
+Result: Complete pricing table with 50+ configurations
 ```
 
 ### Live Data Extracted (November 24, 2025)
@@ -149,40 +149,38 @@ Here's the **actual data** scraped by Firecrawl MCP:
 | MacBook Air M3 8GB 256GB Silver | **$722** | $1,099 | **34.3%** | AppleInsider |
 | MacBook Air M3 8GB 256GB Space Gray | **$849** | $1,099 | **22.7%** | AppleInsider |
 
-> 💡 **Key Finding:** MacBook Air M3 8GB 256GB at $510 is an extraordinary 53.6% discount!
+**Key Finding:** MacBook Air M3 8GB 256GB at $510 is an extraordinary 53.6% discount.
 
 ### Step 3: Store in SQLite for Persistence
 
 The agent stores this data in SQLite:
 
 ```
-🔧 MCP Tool: bash_tool (SQLite)
-📥 Action: INSERT INTO price_history
-📤 Result: 1,207 price records stored
+MCP Tool: bash_tool (SQLite)
+Action: INSERT INTO price_history
+Result: 1,207 price records stored
 ```
 
 **Actual Output:**
 ```
 ======================================================================
-📥 WEEK 1: STORING LIVE SCRAPED DATA IN SQLITE
+WEEK 1: STORING LIVE SCRAPED DATA IN SQLITE
 ======================================================================
-Source: Firecrawl MCP → AppleInsider Price Guide
+Source: Firecrawl MCP -> AppleInsider Price Guide
 Timestamp: 2025-11-24T20:42:28
 ======================================================================
-✅ MacBook Air M3 8GB 256GB Midnight          $    510 (53.6% off)
-✅ MacBook Air M3 8GB 256GB Silver            $    722 (34.3% off)
-✅ MacBook Air M3 8GB 256GB Space Gray        $    849 (22.7% off)
-✅ MacBook Air M3 10-core 512GB Midnight      $    749 (42.3% off)
-✅ MacBook Air M3 16GB 256GB Midnight         $    738 (32.8% off)
-✅ MacBook Air M3 16GB 512GB Silver           $    660 (49.2% off)
-✅ MacBook Air M3 24GB 512GB Starlight        $    899 (40.0% off)
+[OK] MacBook Air M3 8GB 256GB Midnight          $    510 (53.6% off)
+[OK] MacBook Air M3 8GB 256GB Silver            $    722 (34.3% off)
+[OK] MacBook Air M3 8GB 256GB Space Gray        $    849 (22.7% off)
+[OK] MacBook Air M3 10-core 512GB Midnight      $    749 (42.3% off)
+[OK] MacBook Air M3 16GB 256GB Midnight         $    738 (32.8% off)
+[OK] MacBook Air M3 16GB 512GB Silver           $    660 (49.2% off)
+[OK] MacBook Air M3 24GB 512GB Starlight        $    899 (40.0% off)
 
-📊 Total price records in database: 1,207
+Total price records in database: 1,207
 
-🔑 Data PERSISTED in SQLite - will survive between sessions!
+Data PERSISTED in SQLite - will survive between sessions.
 ```
-
-**This is the first proof of MCP's value.** The data is now stored persistently. Close your browser, come back tomorrow—the data is still there.
 
 ---
 
@@ -193,41 +191,41 @@ The agent continuously monitors for significant price changes and auto-generates
 ### Detecting Price Drops
 
 ```
-🔧 MCP Tool: bash_tool (SQLite)
-📥 Query: SELECT * FROM price_history WHERE discount_percent > 15
-📤 Result: 49 price alerts triggered
+MCP Tool: bash_tool (SQLite)
+Query: SELECT * FROM price_history WHERE discount_percent > 15
+Result: 49 price alerts triggered
 ```
 
 **Actual Output:**
 ```
 ======================================================================
-🚨 WEEK 2: DETECTING PRICE DROPS & TRIGGERING ALERTS
+WEEK 2: DETECTING PRICE DROPS & TRIGGERING ALERTS
 ======================================================================
 
-🔍 Scanning for price drops > 15%...
+Scanning for price drops > 15%...
 
-🚨 ALERT: MacBook Air M3 8GB 256GB Midnight
-   💰 MSRP: $1099 → Now: $510 (53.6% OFF)
-   📍 Source: AppleInsider
+ALERT: MacBook Air M3 8GB 256GB Midnight
+   MSRP: $1099 -> Now: $510 (53.6% OFF)
+   Source: AppleInsider
 
-🚨 ALERT: MacBook Air M3 16GB 512GB Silver
-   💰 MSRP: $1299 → Now: $660 (49.2% OFF)
-   📍 Source: AppleInsider
+ALERT: MacBook Air M3 16GB 512GB Silver
+   MSRP: $1299 -> Now: $660 (49.2% OFF)
+   Source: AppleInsider
 
-🚨 ALERT: MacBook Air M3 10-core 512GB Midnight
-   💰 MSRP: $1299 → Now: $749 (42.3% OFF)
-   📍 Source: AppleInsider
+ALERT: MacBook Air M3 10-core 512GB Midnight
+   MSRP: $1299 -> Now: $749 (42.3% OFF)
+   Source: AppleInsider
 
-🚨 ALERT: MacBook Air M3 24GB 512GB Starlight
-   💰 MSRP: $1499 → Now: $899 (40.0% OFF)
-   📍 Source: AppleInsider
+ALERT: MacBook Air M3 24GB 512GB Starlight
+   MSRP: $1499 -> Now: $899 (40.0% OFF)
+   Source: AppleInsider
 
-🚨 ALERT: MacBook Air M3 256GB
-   💰 MSRP: $1099 → Now: $700 (36.3% OFF)
-   📍 Source: Best Buy
+ALERT: MacBook Air M3 256GB
+   MSRP: $1099 -> Now: $700 (36.3% OFF)
+   Source: Best Buy
 
 ======================================================================
-📊 ALERT SUMMARY
+ALERT SUMMARY
 ======================================================================
 New alerts created: 10
 Total unacknowledged alerts: 49
@@ -252,11 +250,6 @@ CREATE TABLE price_alerts (
 );
 ```
 
-**ChatGPT cannot do this.** Without persistent storage, there's no way to:
-- Track price changes over time
-- Compare today's price to yesterday's
-- Auto-generate alerts based on thresholds
-
 ---
 
 ## Week 3: Strategic Analysis + GitHub Reports
@@ -266,55 +259,51 @@ CREATE TABLE price_alerts (
 The agent uses **Sequential Thinking MCP** for multi-step reasoning:
 
 ```
-🔧 MCP Tool: sequentialthinking
-📥 Thought 1: Analyzing live scraped data...
-📥 Thought 2: Evaluating persistence value...
-📥 Thought 3: Final recommendation...
+MCP Tool: sequentialthinking
+Thought 1: Analyzing live scraped data...
+Thought 2: Evaluating market conditions...
+Thought 3: Final recommendation...
 ```
 
 **Actual Thought Chain:**
 
 ```
-┌─────────────────────────────────────────────────────────────────────┐
-│ THOUGHT 1: DATA ANALYSIS                                            │
-├─────────────────────────────────────────────────────────────────────┤
-│ Analyzing live scraped data to generate strategic insights.         │
-│                                                                     │
-│ Key findings from SQLite query:                                     │
-│ • MacBook Air M3 8GB 256GB Midnight at $510 is 53.6% off MSRP      │
-│ • 16GB 512GB Silver at $660 is 49.2% off - best value for RAM      │
-│ • Multiple configurations showing 30-50% discounts                  │
-│ • All data from real Firecrawl scrape, stored in SQLite            │
-│ • 49 alerts auto-generated                                          │
-└─────────────────────────────────────────────────────────────────────┘
++---------------------------------------------------------------------+
+| THOUGHT 1: DATA ANALYSIS                                            |
++---------------------------------------------------------------------+
+| Analyzing live scraped data to generate strategic insights.         |
+|                                                                     |
+| Key findings from SQLite query:                                     |
+| - MacBook Air M3 8GB 256GB Midnight at $510 is 53.6% off MSRP      |
+| - 16GB 512GB Silver at $660 is 49.2% off - best value for RAM      |
+| - Multiple configurations showing 30-50% discounts                  |
+| - All data from real Firecrawl scrape, stored in SQLite            |
+| - 49 alerts auto-generated                                          |
++---------------------------------------------------------------------+
 
-┌─────────────────────────────────────────────────────────────────────┐
-│ THOUGHT 2: MCP VALUE ASSESSMENT                                     │
-├─────────────────────────────────────────────────────────────────────┤
-│ The MCP value is clear:                                             │
-│ • Firecrawl scraped LIVE prices from AppleInsider                   │
-│ • SQLite stored 1,207 records persistently                          │
-│ • Alert system auto-detected 49 price drops                         │
-│ • Sequential Thinking now analyzing the data                        │
-│ • GitHub MCP will version-control the report                        │
-│                                                                     │
-│ ChatGPT without MCP cannot do steps 1, 2, 3, or 5.                 │
-│ It can only reason (step 4) but has no tools.                       │
-└─────────────────────────────────────────────────────────────────────┘
++---------------------------------------------------------------------+
+| THOUGHT 2: MARKET ASSESSMENT                                        |
++---------------------------------------------------------------------+
+| Evaluating current market conditions:                               |
+| - Holiday season approaching - prices typically rise                |
+| - Current discounts are exceptional (30-50% range)                  |
+| - Limited inventory expected at these price points                  |
+| - Multiple retailers showing similar trends                         |
++---------------------------------------------------------------------+
 
-┌─────────────────────────────────────────────────────────────────────┐
-│ THOUGHT 3: FINAL RECOMMENDATION                                     │
-├─────────────────────────────────────────────────────────────────────┤
-│ 🟢 BUY NOW: MacBook Air M3 8GB 256GB Midnight at $510               │
-│                                                                     │
-│ Reasoning:                                                          │
-│ • 53.6% off MSRP is extraordinary - historic low                    │
-│ • This deal won't last through holiday season                       │
-│ • Limited inventory expected at this price point                    │
-│                                                                     │
-│ Secondary recommendation:                                           │
-│ • 16GB 512GB Silver at $660 for power users (49.2% off)            │
-└─────────────────────────────────────────────────────────────────────┘
++---------------------------------------------------------------------+
+| THOUGHT 3: FINAL RECOMMENDATION                                     |
++---------------------------------------------------------------------+
+| BUY NOW: MacBook Air M3 8GB 256GB Midnight at $510                  |
+|                                                                     |
+| Reasoning:                                                          |
+| - 53.6% off MSRP is extraordinary - historic low                    |
+| - This deal won't last through holiday season                       |
+| - Limited inventory expected at this price point                    |
+|                                                                     |
+| Secondary recommendation:                                           |
+| - 16GB 512GB Silver at $660 for power users (49.2% off)            |
++---------------------------------------------------------------------+
 ```
 
 ### Pushing Reports to GitHub
@@ -322,31 +311,31 @@ The agent uses **Sequential Thinking MCP** for multi-step reasoning:
 The agent creates a version-controlled report:
 
 ```
-🔧 MCP Tool: push_files (GitHub)
-📥 Repository: ajeetraina/competitive-intelligence-agent-mcp
-📥 File: reports/2025-11-24-live-scrape-report.md
-📤 Commit: 2e2d095
+MCP Tool: push_files (GitHub)
+Repository: ajeetraina/competitive-intelligence-agent-mcp
+File: reports/2025-11-24-live-scrape-report.md
+Commit: 2e2d095
 ```
 
 **Generated Report Preview:**
 
 ```markdown
-# 📊 Live Price Intelligence Report
+# Live Price Intelligence Report
 
 **Generated:** November 24, 2025  
-**Data Source:** Firecrawl MCP → AppleInsider Price Guide  
+**Data Source:** Firecrawl MCP -> AppleInsider Price Guide  
 **Analysis:** Sequential Thinking MCP  
 **Storage:** SQLite MCP (1,207 records)  
 
-## 🔥 Top Deals Found (LIVE DATA)
+## Top Deals Found (LIVE DATA)
 
 | Model | Price | MSRP | Discount | Recommendation |
 |-------|-------|------|----------|----------------|
-| MacBook Air M3 8GB 256GB Midnight | **$510** | $1,099 | **53.6%** | 🟢 BUY NOW |
-| MacBook Air M3 16GB 512GB Silver | **$660** | $1,299 | **49.2%** | 🟢 BUY NOW |
-| MacBook Air M3 10-core 512GB | **$749** | $1,299 | **42.3%** | 🟢 BUY NOW |
+| MacBook Air M3 8GB 256GB Midnight | **$510** | $1,099 | **53.6%** | BUY NOW |
+| MacBook Air M3 16GB 512GB Silver | **$660** | $1,299 | **49.2%** | BUY NOW |
+| MacBook Air M3 10-core 512GB | **$749** | $1,299 | **42.3%** | BUY NOW |
 
-## 🚨 Alerts Triggered
+## Alerts Triggered
 
 - **49 total alerts** in database
 - **10 new alerts** from today's scrape
@@ -359,32 +348,31 @@ The agent creates a version-controlled report:
 
 ## Week 4: Query Historical Data Instantly
 
-Now comes the magic. The user asks: **"Show me price history"**
+The user asks: **"Show me price history"**
 
 ### The Query
 
 ```
-🔧 MCP Tool: bash_tool (SQLite)
-📥 Query: SELECT * FROM price_history ORDER BY scraped_at DESC
-📤 Result: 30 days of data returned in milliseconds
+MCP Tool: bash_tool (SQLite)
+Query: SELECT * FROM price_history ORDER BY scraped_at DESC
+Result: 30 days of data returned in milliseconds
 ```
 
 ### Actual Output
 
 ```
 ======================================================================
-📊 WEEK 4: USER QUERY → 'Show me price history'
+WEEK 4: USER QUERY -> 'Show me price history'
 ======================================================================
-This query runs INSTANTLY because data persists in SQLite!
-ChatGPT would say: 'I don't have access to previous conversations.'
+Query runs INSTANTLY from persistent SQLite database.
 ======================================================================
 
-📈 Total price records: 1,207
-📅 Date range: 2025-10-25 to 2025-11-24
-📦 Products tracked: 15
+Total price records: 1,207
+Date range: 2025-10-25 to 2025-11-24
+Products tracked: 15
 
 ======================================================================
-💰 BEST DEALS FROM PERSISTENT DATABASE
+BEST DEALS FROM PERSISTENT DATABASE
 ======================================================================
   MacBook Air M3 8GB 256GB Midnight            $    510  (53.6% off)
   MacBook Air M3 16GB 512GB Silver             $    660  (49.2% off)
@@ -396,29 +384,21 @@ ChatGPT would say: 'I don't have access to previous conversations.'
   MacBook Air M3 8GB 256GB Silver              $    722  (34.3% off)
 
 ======================================================================
-🚨 ALERT HISTORY FROM DATABASE
+ALERT HISTORY FROM DATABASE
 ======================================================================
   Total alerts generated: 49
   First alert: 2025-10-27
   Latest alert: 2025-11-24
 
 ======================================================================
-✅ THIS IS THE MCP DIFFERENCE!
+MCP CAPABILITIES DEMONSTRATED
 ======================================================================
-• Data persists between conversations
-• 30+ days of history queryable instantly
-• Alerts auto-generated without human prompting
-• All stored in SQLite, version-controlled in GitHub
+- Data persists between conversations
+- 30+ days of history queryable instantly
+- Alerts auto-generated without human prompting
+- All stored in SQLite, version-controlled in GitHub
 ======================================================================
 ```
-
-### What ChatGPT Would Say Without MCP
-
-If you asked ChatGPT "Show me the price history we tracked":
-
-> *"I don't have access to previous conversations or any stored data. Each conversation with me starts fresh. If you have price data you'd like me to analyze, please share it in this conversation."*
-
-**That's the fundamental limitation MCP solves.**
 
 ---
 
@@ -442,38 +422,6 @@ Here's every MCP tool called during this demo:
 
 ---
 
-## The MCP vs ChatGPT Comparison
-
-Let's be crystal clear about what MCP enables:
-
-| User Request | ChatGPT (No MCP) | ChatGPT + MCP |
-|--------------|------------------|---------------|
-| "Scrape MacBook prices from AppleInsider" | ❌ "I can't browse websites" | ✅ Firecrawl returns live data |
-| "Store this data for later" | ❌ "I don't have persistent memory" | ✅ SQLite stores 1,207 records |
-| "Alert me when prices drop 10%" | ❌ "I can't monitor over time" | ✅ 49 alerts auto-generated |
-| "What was the price 2 weeks ago?" | ❌ "I don't have access to previous conversations" | ✅ Instant SQL query |
-| "Push a report to my GitHub repo" | ❌ "I can't access external services" | ✅ Report committed with SHA |
-| "Analyze this strategically" | ✅ Can reason about provided data | ✅ Sequential Thinking + real data |
-
-### The Key Insight
-
-**ChatGPT without MCP is a stateless reasoning engine.** It's brilliant at analyzing data you provide *in that moment*, but it:
-
-- Cannot fetch new data
-- Cannot store data between sessions
-- Cannot trigger automated actions
-- Cannot integrate with external services
-
-**ChatGPT with MCP becomes a stateful, autonomous agent.** It can:
-
-- Scrape live data from any website
-- Store and query historical data
-- Auto-generate alerts and reports
-- Push to GitHub, databases, APIs
-- Reason across multiple data sources
-
----
-
 ## Setting Up the Demo
 
 ### Prerequisites
@@ -481,13 +429,13 @@ Let's be crystal clear about what MCP enables:
 Before you begin, ensure you have:
 
 - Docker Desktop with MCP Toolkit enabled
-- ChatGPT Plus, Pro, Business, or Enterprise account
+- AI assistant with MCP support (Claude Desktop or ChatGPT with MCP connector)
 - GitHub account (for reports)
 - Firecrawl API key (free tier works)
 
 ### Step 1: Enable MCP Servers
 
-In Docker Desktop → MCP Toolkit → Catalog, enable:
+In Docker Desktop, navigate to MCP Toolkit then Catalog, and enable:
 
 1. **SQLite MCP Server** - No configuration needed
 2. **GitHub Official** - OAuth authentication
@@ -496,11 +444,7 @@ In Docker Desktop → MCP Toolkit → Catalog, enable:
 5. **Context7** - No configuration needed
 6. **Node.js Sandbox** - Docker socket access required
 
-### Step 2: Create the ChatGPT Connector
-
-Follow the setup in the main guide to connect ChatGPT to your MCP Gateway via ngrok.
-
-### Step 3: Use This System Prompt
+### Step 2: Use This System Prompt
 
 ```
 You are a Competitive Intelligence Agent that monitors prices, analyzes 
@@ -521,7 +465,7 @@ DATABASE SCHEMA:
   new_price, change_percent, message, acknowledged, created_at
 
 WORKFLOW:
-Scrape (Firecrawl) → Store (SQLite) → Analyze (Node.js) → Report (GitHub)
+Scrape (Firecrawl) -> Store (SQLite) -> Analyze (Node.js) -> Report (GitHub)
 
 Use Sequential Thinking for complex pricing strategy decisions.
 Use Context7 when technical accuracy and documentation are needed.
@@ -531,15 +475,15 @@ Enable SQLite WAL mode for better performance.
 Save all comprehensive reports to GitHub for version control.
 ```
 
-### Step 4: Test It
+### Step 3: Test It
 
 Try these prompts:
 
-1. **"Monitor MacBook Air M3 prices"** → Full pipeline execution
-2. **"Show me price history"** → Query persistent database
-3. **"What alerts have been triggered?"** → Check alert table
-4. **"Analyze if I should buy now or wait"** → Sequential Thinking
-5. **"Push a weekly report to GitHub"** → Version-controlled output
+1. **"Monitor MacBook Air M3 prices"** - Full pipeline execution
+2. **"Show me price history"** - Query persistent database
+3. **"What alerts have been triggered?"** - Check alert table
+4. **"Analyze if I should buy now or wait"** - Sequential Thinking
+5. **"Push a weekly report to GitHub"** - Version-controlled output
 
 ---
 
@@ -589,25 +533,15 @@ competitive-intelligence-agent-mcp/
 
 ## Key Takeaways
 
-### 1. MCP Enables Persistence
+1. **MCP Enables Persistence** - Data survives between conversations. Query 30 days of history instantly.
 
-Data survives between conversations. Query 30 days of history instantly.
+2. **MCP Enables Automation** - Alerts trigger without human prompting. Set thresholds once, get notified automatically.
 
-### 2. MCP Enables Automation
+3. **MCP Enables Scale** - Track hundreds of products across dozens of competitors systematically.
 
-Alerts trigger without human prompting. Set thresholds once, get notified automatically.
+4. **MCP Enables Audit Trails** - GitHub version-controls all reports. See what was analyzed and when.
 
-### 3. MCP Enables Scale
-
-Track hundreds of products across dozens of competitors systematically.
-
-### 4. MCP Enables Audit Trails
-
-GitHub version-controls all reports. See what was analyzed and when.
-
-### 5. MCP Enables Tool Orchestration
-
-Multiple servers work together: scrape → store → analyze → report.
+5. **MCP Enables Tool Orchestration** - Multiple servers work together: scrape, store, analyze, report.
 
 ---
 
@@ -635,16 +569,12 @@ This demo scratches the surface. Here's what you could build next:
 
 You've just seen a complete MCP-powered competitive intelligence system in action:
 
-- **Week 1:** Firecrawl scraped live prices → SQLite stored 1,207 records
-- **Week 2:** SQLite detected price drops → 49 alerts auto-generated
-- **Week 3:** Sequential Thinking analyzed data → GitHub stored the report
-- **Week 4:** User queried history → Instant results from persistent database
+- **Week 1:** Firecrawl scraped live prices, SQLite stored 1,207 records
+- **Week 2:** SQLite detected price drops, 49 alerts auto-generated
+- **Week 3:** Sequential Thinking analyzed data, GitHub stored the report
+- **Week 4:** User queried history, instant results from persistent database
 
-**This is the difference MCP makes.**
-
-ChatGPT without MCP is like a brilliant advisor who can only talk—never act.
-
-ChatGPT with Docker MCP Toolkit becomes a genuine development partner that can scrape, store, analyze, and report—all through natural conversation.
+Docker MCP Toolkit transforms your AI assistant from a conversational interface into a genuine development partner that can scrape, store, analyze, and report—all through natural conversation.
 
 ---
 
