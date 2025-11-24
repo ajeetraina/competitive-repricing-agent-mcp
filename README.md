@@ -109,19 +109,3 @@ ORDER BY scraped_at;
 ```
 → Returns 35 data points instantly from persistent storage.
 
-## 🛠️ Built With
-
-- **Claude** with MCP (Model Context Protocol)
-- **SQLite** for persistent storage
-- **Chart.js** for visualizations
-- **Python** for data processing
-- **GitHub API** for version control
-
-## 📈 Future Enhancements
-
-- [ ] Scheduled scraping (every 4 hours)
-- [ ] Email/Slack alerts for price drops
-- [ ] Multi-user support with auth
-- [ ] Historical trend predictions (ML)
-- [ ] API endpoint for integrations
-
