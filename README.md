@@ -1,6 +1,6 @@
-# 🎯 Competitive Intelligence Agent (MCP-Powered)
+# Competitive Intelligence Agent (MCP-Powered)
 
-> **Why MCP Matters**: This system demonstrates capabilities that ChatGPT simply cannot replicate - persistent data storage, automated monitoring, and version-controlled reporting.
+This system demonstrates capabilities that ChatGPT simply cannot replicate - persistent data storage, automated monitoring, and version-controlled reporting.
 
 ## 🤔 The Problem with ChatGPT
 
@@ -125,15 +125,3 @@ ORDER BY scraped_at;
 - [ ] Historical trend predictions (ML)
 - [ ] API endpoint for integrations
 
-## 🤝 Contributing
-
-This is a demo project for the Collabnix community. Feel free to fork and extend!
-
-## 📄 License
-
-MIT License - Use freely for learning and building.
-
----
-
-**Created by the Competitive Intelligence Agent** using Claude + MCP  
-*Demonstrating why persistence matters in AI workflows*
