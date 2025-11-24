@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Competitive Intelligence Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 20px; min-height: 100vh; }
+        .container { max-width: 1400px; margin: 0 auto; }
+        .header { background: white; border-radius: 16px; padding: 30px; margin-bottom: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); }
+        .header h1 { color: #1a202c; font-size: 28px; margin-bottom: 10px; }
+        .header .subtitle { color: #718096; font-size: 14px; }
+        .mcp-badge { display: inline-block; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 6px 12px; border-radius: 20px; font-size: 12px; margin-top: 10px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 20px; }
+        .card { background: white; border-radius: 16px; padding: 25px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); }
+        .card-title { font-size: 12px; color: #718096; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; }
+        .price-card.best { border: 3px solid #48bb78; }
+        .best-badge { position: absolute; top: 10px; right: 10px; background: #48bb78; color: white; padding: 4px 10px; border-radius: 20px; font-size: 11px; }
+        .price-card { position: relative; }
+        .retailer { font-size: 20px; font-weight: 700; color: #1a202c; }
+        .price { font-size: 42px; font-weight: 800; color: #2d3748; margin: 10px 0; }
+        .change { display: inline-block; padding: 4px 10px; border-radius: 20px; font-size: 13px; background: #c6f6d5; color: #22543d; }
+        .chart-card { grid-column: 1 / -1; }
+        .rec-card { background: linear-gradient(135deg, #48bb78 0%, #38a169 100%); color: white; grid-column: 1 / -1; }
+        .rec-card .card-title { color: rgba(255,255,255,0.8); }
+        .verdict { font-size: 32px; font-weight: 800; margin: 15px 0; }
+        .rec-list { list-style: none; margin: 15px 0; }
+        .rec-list li { padding: 8px 0 8px 25px; position: relative; }
+        .rec-list li:before { content: "✓"; position: absolute; left: 0; }
+        .comparison { background: #1a202c; color: white; }
+        .comparison .card-title { color: rgba(255,255,255,0.7); }
+        .comp-table { width: 100%; margin-top: 15px; }
+        .comp-table th, .comp-table td { padding: 10px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .comp-table th { color: #a0aec0; font-size: 11px; text-transform: uppercase; }
+        .footer { text-align: center; color: white; margin-top: 30px; font-size: 13px; opacity: 0.8; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 Competitive Intelligence Dashboard</h1>
+            <p class="subtitle">MacBook Air M3 256GB | 30-Day Analysis | 5 Competitors</p>
+            <span class="mcp-badge">⚡ Powered by MCP: SQLite + Firecrawl + GitHub + Sequential Thinking</span>
+        </div>
+
+        <div class="grid">
+            <div class="card price-card best">
+                <div class="best-badge">BEST PRICE</div>
+                <div class="card-title">Best Buy</div>
+                <div class="retailer">🏬 Best Buy</div>
+                <div class="price">$700</div>
+                <div class="change">↓ 32.4% this month</div>
+            </div>
+            <div class="card price-card">
+                <div class="card-title">Costco</div>
+                <div class="retailer">🛒 Costco</div>
+                <div class="price">$843</div>
+                <div class="change">↓ 29.6% this month</div>
+            </div>
+            <div class="card price-card">
+                <div class="card-title">Walmart</div>
+                <div class="retailer">🏪 Walmart</div>
+                <div class="price">$805</div>
+                <div class="change">↓ 21.1% this month</div>
+            </div>
+        </div>
+
+        <div class="card chart-card">
+            <div class="card-title">📈 30-Day Price Trend</div>
+            <canvas id="priceChart"></canvas>
+        </div>
+
+        <div class="card rec-card">
+            <div class="card-title">Strategic Recommendation</div>
+            <div class="verdict">🟢 BUY NOW at Best Buy</div>
+            <p>$700.16 is 36.3% off MSRP - the deepest discount we've tracked in 30 days.</p>
+            <ul class="rec-list">
+                <li>Price dropped 32.4% over 30 days - exceptional value</li>
+                <li>All competitors show downward trends - market equilibrium</li>
+                <li>Holiday stockout risk increasing - buy before demand spikes</li>
+                <li>Use credit card with price protection for downside coverage</li>
+            </ul>
+        </div>
+
+        <div class="card comparison">
+            <div class="card-title">🤖 Why MCP Matters (vs ChatGPT)</div>
+            <table class="comp-table">
+                <tr><th>Capability</th><th>ChatGPT</th><th>MCP Agent</th></tr>
+                <tr><td>Remember prices from last week</td><td>❌ No</td><td>✅ SQLite</td></tr>
+                <tr><td>Track 30 days of history</td><td>❌ No</td><td>✅ 1,200 records</td></tr>
+                <tr><td>Auto-generate alerts</td><td>❌ No</td><td>✅ 39 alerts</td></tr>
+                <tr><td>Version-controlled reports</td><td>❌ No</td><td>✅ GitHub</td></tr>
+                <tr><td>Query historical trends</td><td>❌ No</td><td>✅ Instant SQL</td></tr>
+            </table>
+        </div>
+
+        <div class="footer">
+            <p>Generated by Competitive Intelligence Agent | Claude + MCP</p>
+            <p>Data persists between conversations - something ChatGPT cannot do</p>
+        </div>
+    </div>
+
+    <script>
+        new Chart(document.getElementById('priceChart'), {
+            type: 'line',
+            data: {
+                labels: ['Oct 25', 'Nov 1', 'Nov 8', 'Nov 15', 'Nov 22', 'Nov 24'],
+                datasets: [
+                    { label: 'Best Buy', data: [1036, 966, 830, 750, 710, 700], borderColor: '#FFF200', borderWidth: 3, tension: 0.4 },
+                    { label: 'Costco', data: [1197, 1100, 980, 900, 860, 843], borderColor: '#E31837', borderWidth: 3, tension: 0.4 },
+                    { label: 'Walmart', data: [1021, 967, 925, 862, 820, 805], borderColor: '#0071CE', borderWidth: 3, tension: 0.4 },
+                    { label: 'Amazon', data: [1076, 1050, 1000, 980, 960, 953], borderColor: '#FF9900', borderWidth: 3, tension: 0.4 },
+                    { label: 'Target', data: [1132, 1100, 1060, 1040, 1020, 1013], borderColor: '#CC0000', borderWidth: 3, tension: 0.4 }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: { legend: { position: 'top' }, title: { display: true, text: 'MacBook Air M3 256GB - 30 Day Price History (from SQLite)' } },
+                scales: { y: { min: 650, max: 1250, ticks: { callback: v => '$' + v } } }
+            }
+        });
+    </script>
+</body>
+</html>
