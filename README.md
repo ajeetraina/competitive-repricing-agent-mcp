@@ -2,16 +2,6 @@
 
 This system demonstrates capabilities that ChatGPT simply cannot replicate - persistent data storage, automated monitoring, and version-controlled reporting.
 
-## 🤔 The Problem with ChatGPT
-
-When you ask ChatGPT to monitor prices:
-- ❌ **No Memory**: Forgets everything when you close the tab
-- ❌ **No Persistence**: Can't store 30 days of price history
-- ❌ **No Automation**: Requires manual prompting every time
-- ❌ **No Audit Trail**: No version control of reports
-- ❌ **No Scale**: Can't track 500 SKUs systematically
-
-## ✅ What MCP Enables
 
 This system uses **6 MCP servers** working together:
 
@@ -109,9 +99,8 @@ Open `dashboard/competitive-intelligence-dashboard.html` in your browser.
 - **Amazon**: -11.4%
 - **Target**: -10.5%
 
-## 🔑 The MCP Difference
 
-### Scenario: "What happened to MacBook prices last week?"
+### Prompt: "What happened to MacBook prices last week?"
 
 **ChatGPT Response**:
 > "I don't have access to real-time data or your previous conversations. You would need to provide me with the price information."
