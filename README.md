@@ -1,116 +1,129 @@
-# Competitive Intelligence Agent (MCP-Powered)
+# Competitive Repricing Agent (MCP-Powered)
 
-This system demonstrates capabilities that ChatGPT simply cannot replicate - persistent data storage, automated monitoring, and version-controlled reporting.
+An AI-powered competitive repricing system that monitors competitor prices and automatically adjusts your Stripe product prices to stay competitive. Built with **ChatGPT + Docker MCP Toolkit**.
 
+## 🎯 What This Does
 
-This system uses **6 MCP servers** working together:
+This agent demonstrates capabilities that ChatGPT alone cannot replicate:
 
-| Server | Purpose | ChatGPT Alternative |
-|--------|---------|--------------------|
-| **SQLite** | Store 30+ days of price history | ❌ None - forgets between sessions |
-| **Firecrawl** | Structured web scraping with schemas | ⚠️ Basic browsing, unreliable |
-| **Node.js** | Statistical calculations, charts | ⚠️ Code interpreter (limited) |
-| **GitHub** | Version-controlled reports | ❌ Manual copy-paste only |
-| **Context7** | Up-to-date library documentation | ❌ Training cutoff issues |
-| **Sequential Thinking** | Complex multi-factor decisions | ⚠️ Basic reasoning |
+- **Monitors competitor prices** in real-time (Amazon, Best Buy, Walmart)
+- **Automatically reprices** your Stripe products to beat competitors
+- **Logs all decisions** to SQLite for audit trail
+- **Pushes reports** to GitHub for compliance
 
-## 📊 Demo Results
+## 🔧 MCP Servers Used
 
-This demo created:
-- **1,200 price records** across 8 products, 5 competitors, 30 days
-- **39 price alerts** triggered automatically when prices dropped >5%
-- **Trend analysis** showing 10-36% discounts from MSRP
-- **Persistent database** that survives between conversations
+| Server | Purpose |
+|--------|--------|
+| **Firecrawl** | Scrape competitor prices from retail websites |
+| **Stripe** | Update your product prices automatically |
+| **SQLite** | Store pricing history and audit logs |
+| **GitHub** | Push repricing reports for compliance |
+| **Sequential Thinking** | Complex pricing strategy decisions |
+| **Context7** | Up-to-date library documentation |
+| **Node.js Sandbox** | Statistical calculations |
+
+## 📊 Latest Demo Results
+
+**Date:** December 9, 2025  
+**Product:** MacBook Air M3 13-inch 256GB
+
+### Repricing Action Taken
+
+| Metric | Before | After |
+|--------|--------|-------|
+| Your Price | $549.99 | $504.99 |
+| Price Change | — | -$45.00 (-8.2%) |
+| Market Position | 3rd | **#1 LOWEST** |
+
+### Competitor Landscape
+
+| Retailer | Price | vs. Our Price |
+|----------|-------|---------------|
+| **Our Store** | $504.99 | ✅ MARKET LEADER |
+| Best Buy | $509.99 | +$5.00 (we beat by 1%) |
+| Walmart | $669.00 | +$164.01 higher |
+| Amazon | $699.00 | +$194.01 higher |
+
+### Strategy Applied: UNDERCUT
+
+- **Trigger:** Best Buy dropped to $509.99 (below our $549.99)
+- **Calculation:** $509.99 × 0.99 = $504.99
+- **Result:** We now have the lowest price by 1%
 
 ## 🏗️ Architecture
 
 ```
-+---------------------------------------------------------------------+
-|                        USER REQUEST                                  |
-|            "Monitor MacBook Air M3 prices"                          |
-+-----------------------------+---------------------------------------+
-                              |
-                              v
-+---------------------------------------------------------------------+
-|                     AI + MCP GATEWAY                                |
-|              Orchestrates tools based on intent                     |
-+-----------------------------+---------------------------------------+
-                              |
-        +---------------------+---------------------+
-        |                     |                     |
-        v                     v                     v
-+---------------+    +---------------+    +---------------+
-|   FIRECRAWL   |    |    SQLITE     |    |    GITHUB     |
-|  Scrape Web   |    |  Store Data   |    |  Push Reports |
-+---------------+    +---------------+    +---------------+
-        |                     |                     |
-        +---------------------+---------------------+
-                              |
-                              v
-+---------------------------------------------------------------------+
-|               SEQUENTIAL THINKING + CONTEXT7                        |
-|           Complex reasoning + Documentation lookup                  |
-+---------------------------------------------------------------------+
+┌─────────────────────────────────────────────────────────────┐
+│                     USER REQUEST                             │
+│        "Monitor MacBook Air M3 and stay competitive"        │
+└─────────────────────────┬───────────────────────────────────┘
+                          │
+                          ▼
+┌─────────────────────────────────────────────────────────────┐
+│              ChatGPT + MCP Gateway                          │
+│           Orchestrates tools based on intent                │
+└─────────────────────────┬───────────────────────────────────┘
+                          │
+        ┌─────────────────┼─────────────────┐
+        │                 │                 │
+        ▼                 ▼                 ▼
+┌───────────────┐ ┌───────────────┐ ┌───────────────┐
+│   FIRECRAWL   │ │    STRIPE     │ │    SQLITE     │
+│ Scrape Prices │ │ Update Price  │ │  Log Decision │
+└───────────────┘ └───────────────┘ └───────────────┘
+        │                 │                 │
+        └─────────────────┼─────────────────┘
+                          │
+                          ▼
+┌─────────────────────────────────────────────────────────────┐
+│                        GITHUB                                │
+│              Push repricing report for audit                │
+└─────────────────────────────────────────────────────────────┘
 ```
-
-## 🚀 Quick Start
-
-### 1. Initialize Database
-```bash
-python3 scripts/init_database.py
-```
-
-### 2. Run Trend Analysis
-```bash
-python3 scripts/analyze_trends.py
-```
-
-### 3. View Dashboard
-Open `dashboard/competitive-intelligence-dashboard.html` in your browser.
 
 ## 📁 Project Structure
 
 ```
-├── scripts/
-│   ├── init_database.py      # Create SQLite DB with sample data
-│   └── analyze_trends.py     # Query historical trends
-├── dashboard/
-│   └── competitive-intelligence-dashboard.html
 ├── reports/
-│   └── 2025-11-24-weekly-report.md
+│   └── repricing/
+│       └── 2025-12-09-macbook-air-m3-repricing.md   # Latest repricing report
 └── README.md
 ```
 
-## 💡 Key Insights from Demo
+## 🚀 How to Use
 
-### Best Deals Found (from 30-day analysis)
-| Product | Retailer | Price | Discount |
-|---------|----------|-------|----------|
-| MacBook Air M3 256GB | Best Buy | $700.16 | 36.3% off |
-| Xbox Series X | Walmart | $347.16 | 30.4% off |
-| AirPods Pro 2nd Gen | Walmart | $177.12 | 28.9% off |
-| MacBook Air M3 512GB | Costco | $930.99 | 28.3% off |
-| Nintendo Switch OLED | Costco | $254.14 | 27.2% off |
+1. **Set up Docker MCP Toolkit** with Firecrawl, Stripe, SQLite, GitHub servers
+2. **Connect ChatGPT** to your MCP Gateway
+3. **Use this prompt:**
 
-### 30-Day Price Movement
-- **Best Buy**: -32.4% (most aggressive pricing)
-- **Costco**: -29.6% 
-- **Walmart**: -21.1%
-- **Amazon**: -11.4%
-- **Target**: -10.5%
-
-
-### Prompt: "What happened to MacBook prices last week?"
-
-**ChatGPT Response**:
-> "I don't have access to real-time data or your previous conversations. You would need to provide me with the price information."
-
-**MCP Agent Response**:
-```sql
-SELECT competitor, price, scraped_at 
-FROM price_history 
-WHERE product_id = 1 AND scraped_at > date('now', '-7 days')
-ORDER BY scraped_at;
 ```
-→ Returns 35 data points instantly from persistent storage.
+Set up a competitive repricing agent:
+1. I sell MacBook Air M3 on my store - current Stripe price is $549.99
+2. Monitor competitor prices on Amazon, Walmart, Best Buy
+3. When ANY competitor drops below my price:
+   - Automatically update my Stripe product price to match or beat them
+   - Use "undercut" strategy (price 1% below lowest competitor)
+   - Log the repricing decision to SQLite
+   - Push pricing change report to GitHub
 
+Start monitoring now.
+```
+
+## 📈 Stripe Transaction Details
+
+| Field | Value |
+|-------|-------|
+| Product ID | `prod_TZaK0ARRJ5OJJ8` |
+| Old Price ID | `price_1ScRA7I9l1vmUkznMrV6QUDz` |
+| New Price ID | `price_1ScRCVI9l1vmUkzn0hTnrLmW` |
+| Status | ✅ COMPLETED |
+
+## 🔗 Related
+
+- [Docker MCP Toolkit Documentation](https://docs.docker.com/mcp/)
+- [Blog Post: How to Add MCP Servers to ChatGPT](https://docker.com/blog/add-mcp-server-to-chatgpt/)
+
+---
+
+*Powered by ChatGPT + Docker MCP Toolkit*
