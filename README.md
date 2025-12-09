@@ -110,15 +110,6 @@ Set up a competitive repricing agent:
 Start monitoring now.
 ```
 
-## 📈 Stripe Transaction Details
-
-| Field | Value |
-|-------|-------|
-| Product ID | `prod_TZaK0ARRJ5OJJ8` |
-| Old Price ID | `price_1ScRA7I9l1vmUkznMrV6QUDz` |
-| New Price ID | `price_1ScRCVI9l1vmUkzn0hTnrLmW` |
-| Status | ✅ COMPLETED |
-
 ## 🔗 Related
 
 - [Docker MCP Toolkit Documentation](https://docs.docker.com/mcp/)
