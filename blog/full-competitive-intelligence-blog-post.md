@@ -1,1 +1,0 @@
-$(cat /tmp/updated-blog.md)
