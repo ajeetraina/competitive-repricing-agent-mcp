@@ -58,8 +58,7 @@ User: "Monitor MacBook Air M3 prices and stay competitive"
      │
      ▼
 ┌────────────────────────────────────────────────────────────────┐
-│                   Claude AI Thinking:                          │
-│  "User wants competitive repricing. I need to:                 │
+│                   ChatGPT repricing. I need to:                │
 │   1. Scrape competitor prices (Firecrawl MCP)                  │
 │   2. Store in database (SQLite MCP)                            │
 │   3. Compare & decide strategy (Sequential Thinking MCP)       │
